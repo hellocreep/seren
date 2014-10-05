@@ -29,9 +29,9 @@
     }
   }
 
-  var whiteSpaceRe  = /\s/gm;
+  var whiteSpaceRe  = /\s/g;
   var privatePrefix = '__';
-  var hasOwnprop    = Object.prototype.hasOwnProperty;
+  var hasOwnprop    = {}.hasOwnProperty;
   var slice         = [].slice;
 
   var _type = function(obj) {
@@ -64,8 +64,8 @@
       }
       this[o] = opts[o];
     }
-    if(isFunction(this.init)) this.init();
     this.templateStr = $(this.template).html();
+    if(isFunction(this.init)) this.init();
     return this;
   }
 
@@ -108,7 +108,7 @@
   Seren.prototype.save = function(opts) {
     if(!opts) opts           = {};
     if(!opts.data) opts.data = this.data;
-    if(!opts.url) opts.url   = this.urls.save;
+    if(!opts.url) opts.url   = this.url || '';
     if(!opts.type) opts.type = 'post';
     this._deferred           = $.ajax(opts);
     return this;
@@ -139,11 +139,11 @@
     var parent = this;
     var child  = function child() {
       return parent.apply(this, arguments);
-    };
+    }
 
     child.prototype = inherit(parent.prototype);
     for(var o in opts) {
-        child.prototype[o] = opts[o];
+      child.prototype[o] = opts[o];
     }
     return child;
   }

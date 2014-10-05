@@ -1,0 +1,31 @@
+{
+  "name": "seren",
+  "main": "seren.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/hellocreep/seren",
+  "authors": [
+    "hellocreep <hellocreep@gmail.com>"
+  ],
+  "description": "module contaienr",
+  "moduleType": [
+    "amd",
+    "es6"
+  ],
+  "keywords": [
+    "library",
+    "module",
+    "container"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.1"
+  }
+}
