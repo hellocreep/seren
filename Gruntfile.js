@@ -14,16 +14,6 @@ module.exports = function(grunt) {
           reload: true
         }
       }
-    },
-    connect: {
-      server: {
-        options: {
-          port: 9000,
-          hostname: 'localhost',
-          base: 'example',
-          keepalive: true
-        }
-      }
     }
   });
 }

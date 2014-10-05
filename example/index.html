@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Example</title>
+    <link rel="stylesheet" href="css/pure.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.validate.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="../seren.js"></script>
+    <script src="js/main.js"></script>
+  </head>
+  <body>
+    <div id="main" class="container">
+      <div class="pure-g">
+        <div id="todoMod" class="pure-u-1">
+          <h1>TODO</h1>
+          <form action="" class="pure-form">
+            <div class="pure-g">
+              <div class="pure-u-3-4">
+                <input type="text" class="pure-input-1" placeholder="add todo" required>
+              </div>
+              <div class="pure-u-1-4">
+                <button type="submit" class="pure-button pure-button-primary pure-input-1 js-add">Add</button>
+              </div>
+            </div>
+          </form>
+          <ul class="todo-list"></ul>
+        </div>
+
+
+        <script type="text/template" id="todoTmpl">
+          {{#each .}}
+          <li class="pure-g" data-id="{{id}}" data-status="{{status}}" data-content="{{content}}">
+            <div class="pure-u-3-5 js-todo-content">
+              {{#if status}}
+                {{content}}
+              {{else}}
+                <del>
+                {{content}}
+                </del>
+              {{/if}}
+            </div>
+            <div class="pure-u-1-5">
+              <a href="#" class="js-achieve">Achieve</a>
+            </div>
+            <div class="pure-u-1-5">
+              <a href="#" class="js-delete">Delete</a>
+            </div>
+          </li>
+          {{/each}}
+        </script>
+        <!-- <div class="pure-u-1 js-signup-mod">
+          <form action="" class="pure-form pure-form-stacked">
+            <fieldset>
+              <legend>Sign up</legend>
+              <label for="email">Email</label>
+              <input type="text" name="email" class="pure-u-1">
+              <label for="name">Name</label>
+              <input type="text" name="name" class="pure-u-1">
+              <label for="password">Password</label>
+              <input type="password" name="password" class="pure-u-1">
+              <label for="confirm">Confirm</label>
+              <input type="password" name="confirm" class="pure-u-1">
+              <button type="submit" class="pure-button pure-button-primary pure-u-1 js-submit">Sign up</button>
+            </fieldset>
+          </form>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>
