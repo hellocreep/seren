@@ -20,6 +20,7 @@ Data.prototype = {
   remove: function(condition, cb) {
     var data = this.data;
     var result = [];
+    if(!condition) return (this.data = []);
     util.each(data, function(item, index) {
       var flag = true;
       util.each(condition, function(val, key) {
@@ -126,15 +127,17 @@ Seren.prototype.on = function() {
 }
 
 // TODO
+// Unbind the jquery function
 Seren.prototype.off = function(evt, func) {
   var self = this;
   if(func) {
     var funcs = this.events[evt];
-    for(var i = 0; i < funcs.length; i++) {
-      if(funcs[i] === func) {
-
+    util.each(funcs, function(item, index) {
+      if(item === func) {
+        self.events.splice(index, 1);
+        // self.$el.off()
       }
-    }
+    });
   } else {
     evt.replace(/\S+/g, function(name) {
       self.events[evt] = [];
@@ -218,11 +221,6 @@ Seren.extend = function(opts) {
 
 Seren.data = function() {
   var args = slice.call(arguments);
-  for(var a in args[0]) {
-    if(!hasOwnprop.call(Data.prototype, a)) {
-      Data.prototype[a] = args[a];
-    }
-  }
   util.each(arguments, function(val, key) {
     if(!hasOwnprop.call(Data.prototype, key)) {
       Data.prototype[key] = val;

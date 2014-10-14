@@ -125,7 +125,7 @@ The target will be found in this module.
 
 example
 ```js
-  mod.render('.bd', mod.get('data'));
+  mod.render('.bd', mod.data.find());
 ```
 
 ### mod.fetch([options])
@@ -177,6 +177,8 @@ example
       return JSON.stringify(this.data);
     }
   });
+
+  var result = mod.data.toJSON();
 ```
 
 ### mod.data.find([condition])
@@ -188,13 +190,13 @@ example
   mod.data.find({id: 1});
 ```
 
-### mod.data.remove([condition, callbck])
+### mod.data.remove(condition [,callbck])
 
 Remove the mathed data, return the removed data.
 
 example
 ```js
-  mod.remove({id: 1, name: 'test'}, function() {
+  mod.data.remove({id: 1, name: 'test'}, function() {
     mod.save();
   });
 ```
@@ -214,7 +216,7 @@ Add a new data
 
 example
 ```js
-  mod.create({id: 2, name: 'test3'});
+  mod.data.create({id: 2, name: 'test3'});
 ```
 
 ## Examples
