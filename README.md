@@ -17,8 +17,6 @@ Seren is a module container, not an application nor MV* framework, just a librar
 
 `<script src="path/to/seren.js"></script>`
 
-> It's support the AMD, CMD and the trandition way.
-
 
 the HTML
 ```html
@@ -89,25 +87,36 @@ example
 
 ### mod.on(options)
 
-Bind functions on this module.
+Bind functions in this module.
 
 example
 ```js
   mod.on({
     '.js-add click': 'add',
-    '.js-edit click: function() {
+    '.js-edit click': function() {
       this.toggle();
     }
   });
 ```
 
-### mod.set(name, value)
+### mod.off(options)
 
-Set a data
+Unbind functions in this module.
 
-### mod.get(name)
+> TODO
 
-Get a data
+### mod.emit(fnName)
+
+Emit the function in this module.
+
+example
+```js
+  mod.emit('save');
+```
+
+### mod.setData(data)
+
+Set data
 
 ### mod.render(target, data)
 
@@ -119,9 +128,21 @@ example
   mod.render('.bd', mod.get('data'));
 ```
 
+### mod.fetch([options])
+
+Ajax request to get the data, return this module, the ajax status store in a deffered, use `mod.done` to handle the reponse.
+
+```js
+  mod.fetch().done(function(result) {
+    this.setData(result);
+  }).fail(functoin(result) {
+    alert(result);
+  });
+```
+
 ### mod.save([options])
 
-Ajax submit, return module self, the ajax status store in a deffered, use `done` to handle the rest.
+Ajax submit, return this module, the ajax status store in a deffered, use `mod.done` to handle the response.
 
 ```js
   mod.save().done(function(result) {
@@ -145,13 +166,62 @@ If define a same name function of the conscructor, use `_super` to get it.
   mod._super('func')(args);
 ```
 
-## Examples
+### Module.data([options])
 
+Add method to the module's data opearation.
+
+example
+```js
+  Module.data({
+    toJSON: function() {
+      return JSON.stringify(this.data);
+    }
+  });
+```
+
+### mod.data.find([condition])
+
+Find the matched data, return the data collection.
+
+example
+```js
+  mod.data.find({id: 1});
+```
+
+### mod.data.remove([condition, callbck])
+
+Remove the mathed data, return the removed data.
+
+example
+```js
+  mod.remove({id: 1, name: 'test'}, function() {
+    mod.save();
+  });
+```
+
+### mod.data.update(condition, update)
+
+Update the mathed data, return the updated data.
+
+example
+```js
+  mod.update({id: 1}, {name: 'test2'});
+```
+
+### mod.data.create(data)
+
+Add a new data
+
+example
+```js
+  mod.create({id: 2, name: 'test3'});
+```
+
+## Examples
 
 
 ## Todo
 
-* Data Operation
 * Router
 
 ## License

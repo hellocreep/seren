@@ -32,15 +32,15 @@
 
         <script type="text/template" id="todoTmpl">
           {{#each .}}
-          <li class="pure-g" data-id="{{id}}" data-status="{{status}}" data-content="{{content}}">
+          <li class="pure-g" data-id="{{id}}" data-achieve="{{achieve}}" data-content="{{content}}">
             <div class="pure-u-3-5 js-todo-content">
-              {{#if status}}
+              {{#unless achieve}}
                 {{content}}
               {{else}}
                 <del>
                 {{content}}
                 </del>
-              {{/if}}
+              {{/unless}}
             </div>
             <div class="pure-u-1-5">
               <a href="#" class="js-achieve">Achieve</a>
@@ -51,22 +51,6 @@
           </li>
           {{/each}}
         </script>
-        <!-- <div class="pure-u-1 js-signup-mod">
-          <form action="" class="pure-form pure-form-stacked">
-            <fieldset>
-              <legend>Sign up</legend>
-              <label for="email">Email</label>
-              <input type="text" name="email" class="pure-u-1">
-              <label for="name">Name</label>
-              <input type="text" name="name" class="pure-u-1">
-              <label for="password">Password</label>
-              <input type="password" name="password" class="pure-u-1">
-              <label for="confirm">Confirm</label>
-              <input type="password" name="confirm" class="pure-u-1">
-              <button type="submit" class="pure-button pure-button-primary pure-u-1 js-submit">Sign up</button>
-            </fieldset>
-          </form>
-        </div> -->
       </div>
     </div>
   </body>
