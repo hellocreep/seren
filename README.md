@@ -222,10 +222,6 @@ example
 ## Examples
 
 
-## Todo
-
-* Router
-
 ## License
 
 Copyright (c) 2014 lea

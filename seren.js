@@ -67,9 +67,8 @@ Data.prototype = {
 }
 
 module.exports = Data;
-},{"./util":4}],2:[function(require,module,exports){
+},{"./util":3}],2:[function(require,module,exports){
 var Data          = require('./data');
-var Router        = require('./router');
 var util          = require('./util');
 
 var inherit       = util.inherit;
@@ -228,18 +227,8 @@ Seren.data = function() {
   });
 }
 
-Seren.router = function() {
-
-}
-
 window.Seren = Seren;
-},{"./data":1,"./router":3,"./util":4}],3:[function(require,module,exports){
-function Router() {
-
-}
-
-module.exports = Router;
-},{}],4:[function(require,module,exports){
+},{"./data":1,"./util":3}],3:[function(require,module,exports){
 var whiteSpaceRe  = /\s/g;
 var privatePrefix = '__';
 var hasOwnprop    = {}.hasOwnProperty;
