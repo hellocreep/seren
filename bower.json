@@ -1,16 +1,12 @@
 {
   "name": "seren",
   "main": "seren.js",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "homepage": "https://github.com/hellocreep/seren",
   "authors": [
     "hellocreep <hellocreep@gmail.com>"
   ],
-  "description": "module contaienr",
-  "moduleType": [
-    "amd",
-    "es6"
-  ],
+  "description": "a module contaienr",
   "keywords": [
     "library",
     "module",
@@ -25,6 +21,6 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~2.1.1"
+    "jquery": "~1.11.1"
   }
 }

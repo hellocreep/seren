@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         }
       },
       js: {
-        files: ['lib/components/*.js'],
+        files: ['lib/*.js'],
         tasks: ['browserify']
       }
     },

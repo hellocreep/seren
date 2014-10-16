@@ -1,7 +1,13 @@
 Seren
 =====
 
+> Seren is short for Serenity.
+
 Seren is a module container, not an application nor MV* framework, just a library to set you free from everywhere jQuery style, make your code structured.
+
+Seren provide simple and useful API, at the same time Seren is flexible and easy to be extend.
+
+Seren is small, less than 4kb.
 
 ## Getting started
 
@@ -43,8 +49,6 @@ the javascript
 ### Seren.extend([options])
 Return a child module constructor inherit from Seren.
 
-if you want to the `render` function, the option `templateEngine` is required.
-
 example
 ```js
   var Module = Seren.extend({
@@ -61,15 +65,12 @@ Get a instance.
 
 Default options
 
-* `template` the template id.
 * `init` the function will be invoked when Module is initialized.
-* `url` the default url to save.
 
 example
 ```js
   var mod = new Module('.module', {
     template: '#tmpl',
-    url: '/save/',
     init: function() {
       this.find('form').validate();
     }
@@ -114,50 +115,6 @@ example
   mod.emit('save');
 ```
 
-### mod.setData(data)
-
-Set data
-
-### mod.render(target, data)
-
-Render html.
-The target will be found in this module.
-
-example
-```js
-  mod.render('.bd', mod.data.find());
-```
-
-### mod.fetch([options])
-
-Ajax request to get the data, return this module, the ajax status store in a deffered, use `mod.done` to handle the reponse.
-
-```js
-  mod.fetch().done(function(result) {
-    this.setData(result);
-  }).fail(functoin(result) {
-    alert(result);
-  });
-```
-
-### mod.save([options])
-
-Ajax submit, return this module, the ajax status store in a deffered, use `mod.done` to handle the response.
-
-```js
-  mod.save().done(function(result) {
-    this.render('.bd', result);
-  });
-```
-
-### mod.done(callback)
-
-Handle the ajax response, this callback's context is this module not a jquery.ajax.
-
-### mod.fail(callback)
-
-Handle the ajax fail, this callback's context is this module not a jquery.ajax.
-
 ### mod._super(name)
 
 If define a same name function of the conscructor, use `_super` to get it.
@@ -201,13 +158,15 @@ example
   });
 ```
 
-### mod.data.update(condition, update)
+### mod.data.update(condition, update [callback])
 
 Update the mathed data, return the updated data.
 
 example
 ```js
-  mod.update({id: 1}, {name: 'test2'});
+  mod.data.update({id: 1}, {name: 'test2'}, function() {
+    mod.save();
+  });
 ```
 
 ### mod.data.create(data)

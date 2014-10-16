@@ -2,7 +2,8 @@
 $(function() {
 
   Seren.data({
-    validate: function() {
+    toJSON: function() {
+      return JSON.stringify(this.data);
     }
   });
 
@@ -13,16 +14,27 @@ $(function() {
     }
   });
 
-  var todoMod = new Module('#todoMod', {
+  var modTodo = new Module('#modTodo', {
     init: function() {
       var data = JSON.parse(localStorage.getItem('todo') || '[]');
       this.setData(data);
-      this.render('.todo-list', data.todo);
+      this.render('.todo-list', data);
       this.find('form').validate();
+      this.on({
+        '.js-add click': 'add',
+        '.js-achieve click': 'achieve',
+        '.js-delete click': 'del'
+      });
     },
-    template: '#todoTmpl',
+    template: $('#todoTmpl').html(),
+    render: function(target, data) {
+      var tmpl = this.templateEngine(this.template);
+      this.find(target).html(tmpl(data));
+      return this;
+    },
     save: function() {
-      localStorage.setItem('todo', JSON.stringify(this.data.find()));
+      localStorage.setItem('todo', this.data.toJSON());
+      this.render('.todo-list', this.data.find());
     },
     add: function(e) {
       this.action(e);
@@ -37,44 +49,25 @@ $(function() {
       this.data.create(data);
       input.val('');
       this.save();
-      this.render();
     },
     achieve: function(e) {
       this.action(e);
-      var $li = $(e.currentTarget).closest('li');
-      this.data.update({id: $li.data('id')}, {achieve: !$li.data('achieve')})
-      this.save();
-      this.render();
-    },
-    del: function(e)  {
       var self = this;
-      this.action(e);
-      var $this = $(e.currentTarget).closest('li');
-      var condition = {id: $this.data('id')};
-      this.data.remove(condition, function() {
+      var $li = $(e.currentTarget).closest('li');
+      this.data.update({id: $li.data('id')}, {achieve: !$li.data('achieve')}, function() {
         self.save();
-        self.render();
       });
     },
-    render: function() {
-      this._super('render')('.todo-list', this.data.find());
+    del: function(e)  {
+      this.action(e);
+      var self = this;
+      var $li = $(e.currentTarget).closest('li');
+      var condition = {id: $li.data('id')};
+      this.data.remove(condition, function() {
+        self.save();
+      });
     }
   });
-
-  todoMod.on({
-    '.js-add click': 'add',
-    '.js-achieve click': 'achieve',
-    '.js-delete click': 'del'
-  });
-
-  Seren.router({
-    '/': function() {
-
-    },
-    '/user': function() {
-
-    }
-  })
 
 });
 })(jQuery);
