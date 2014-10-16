@@ -149,7 +149,7 @@ example
 
 ### mod.data.remove(condition [,callbck])
 
-Remove the mathed data, return the removed data.
+Remove the matched data, return the removed data.
 
 example
 ```js
@@ -160,7 +160,7 @@ example
 
 ### mod.data.update(condition, update [callback])
 
-Update the mathed data, return the updated data.
+Update the matched data, return the updated data.
 
 example
 ```js
